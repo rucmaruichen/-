@@ -1,0 +1,36 @@
+
+
+```{r}
+library(tidyverse)
+library(leaps)
+library(datasets)
+# 建立完全模型 
+full.model <- lm(Fertility ~., data = swiss)
+step.model <- stepAIC(full.model, direction = "both", 
+                      trace = FALSE)
+summary(step.model)
+```
+```{r}
+data<- read.csv("C:/Users/DELL/Desktop/Deep-Feature-Selection-master/docs/notebooks/X.csv")
+data
+```
+
+```{r}
+X0<- read.table("C:/Users/DELL/Desktop/Deep-Feature-Selection-master/data/nonlinear/p_500_N_600_s_4/X_0.txt")
+X1<- read.table("C:/Users/DELL/Desktop/Deep-Feature-Selection-master/data/nonlinear/p_500_N_600_s_4/X_1.txt")
+X<- rbind(X0,X1)
+y0<- read.table("C:/Users/DELL/Desktop/Deep-Feature-Selection-master/data/nonlinear/p_500_N_600_s_4/y_0.txt")
+y1<- read.table("C:/Users/DELL/Desktop/Deep-Feature-Selection-master/data/nonlinear/p_500_N_600_s_4/y_1.txt")
+y<- rbind(y0,y1)
+data<- cbind(y,X)
+colnames(data)[1] = 'y'
+data
+```
+
+```{r}
+# 建立完全模型 
+full.model <- lm(y ~., data = data)
+step.model <- stepAIC(full.model, direction = "both", 
+                      trace = FALSE)
+summary(step.model)
+```
